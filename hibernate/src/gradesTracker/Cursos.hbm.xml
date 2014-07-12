@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/07/2014 12:37:06 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Cursos" table="cursos" catalog="episunsa_gradesTracker1">
+        <id name="id" type="string">
+            <column name="id" length="7" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="curriculas" class="Curriculas" fetch="select">
+            <column name="curricula_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="componentesFormacion" class="ComponentesFormacion" fetch="select">
+            <column name="componentes_formacion_id" length="1" not-null="true" />
+        </many-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" length="128" not-null="true" />
+        </property>
+        <property name="creditos" type="int">
+            <column name="creditos" not-null="true" />
+        </property>
+        <property name="prerequisitosCreditos" type="java.lang.Integer">
+            <column name="prerequisitos_creditos" />
+        </property>
+        <property name="horasTeoria" type="java.lang.Byte">
+            <column name="horas_teoria" />
+        </property>
+        <property name="horasSemiPresecial" type="java.lang.Byte">
+            <column name="horas_semiPresecial" />
+        </property>
+        <property name="horasTeoricoPractico" type="java.lang.Byte">
+            <column name="horas_teoricoPractico" />
+        </property>
+        <property name="horasPractica" type="java.lang.Byte">
+            <column name="horas_practica" />
+        </property>
+        <property name="semestre" type="byte">
+            <column name="semestre" not-null="true" />
+        </property>
+        <property name="prerequisitos" type="string">
+            <column name="prerequisitos" length="256" />
+        </property>
+        <set name="cursosProgramadoses" table="cursos_programados" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="curso_id" length="7" not-null="true" />
+            </key>
+            <one-to-many class="CursosProgramados" />
+        </set>
+    </class>
+</hibernate-mapping>

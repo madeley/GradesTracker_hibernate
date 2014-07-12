@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/07/2014 12:37:06 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="CursosProgramados" table="cursos_programados" catalog="episunsa_gradesTracker1">
+        <composite-id name="id" class="CursosProgramadosId">
+            <key-property name="id" type="string">
+                <column name="id" length="19" />
+            </key-property>
+            <key-property name="cursoId" type="string">
+                <column name="curso_id" length="7" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="cursos" class="Cursos" update="false" insert="false" fetch="select">
+            <column name="curso_id" length="7" not-null="true" />
+        </many-to-one>
+        <property name="anhoDictado" type="short">
+            <column name="anho_dictado" not-null="true" />
+        </property>
+        <property name="turno" type="java.lang.Character">
+            <column name="turno" length="1" />
+        </property>
+        <property name="cicloDictado" type="char">
+            <column name="ciclo_dictado" length="1" not-null="true" />
+        </property>
+        <property name="spreadsheetkey" type="string">
+            <column name="spreadsheetkey" length="512" />
+        </property>
+        <property name="tipoCatedra" type="char">
+            <column name="tipo_catedra" length="1" not-null="true" />
+        </property>
+        <set name="matriculases" table="matriculas" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="cursos_id" length="19" not-null="true" />
+                <column name="cursos_programados_id" length="7" not-null="true" />
+            </key>
+            <one-to-many class="Matriculas" />
+        </set>
+    </class>
+</hibernate-mapping>

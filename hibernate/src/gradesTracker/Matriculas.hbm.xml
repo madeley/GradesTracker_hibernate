@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/07/2014 12:37:06 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Matriculas" table="matriculas" catalog="episunsa_gradesTracker1">
+        <composite-id name="id" class="MatriculasId">
+            <key-property name="id" type="int">
+                <column name="id" />
+            </key-property>
+            <key-property name="cursosId" type="string">
+                <column name="cursos_id" length="19" />
+            </key-property>
+            <key-property name="cursosProgramadosId" type="string">
+                <column name="cursos_programados_id" length="7" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="usuarios" class="Usuarios" fetch="select">
+            <column name="usuario_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="cursosProgramados" class="CursosProgramados" update="false" insert="false" fetch="select">
+            <column name="cursos_id" length="19" not-null="true" />
+            <column name="cursos_programados_id" length="7" not-null="true" />
+        </many-to-one>
+        <property name="notaFinal" type="java.lang.Byte">
+            <column name="notaFinal" />
+        </property>
+        <property name="observacion" type="string">
+            <column name="observacion" length="256" />
+        </property>
+        <property name="letras" type="string">
+            <column name="letras" length="45" />
+        </property>
+        <property name="matriculasCursosId" type="string">
+            <column name="matriculas_cursos_id" length="7" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

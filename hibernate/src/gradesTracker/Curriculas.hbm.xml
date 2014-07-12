@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/07/2014 12:37:06 AM by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Curriculas" table="curriculas" catalog="episunsa_gradesTracker1">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="anhoInicio" type="java.lang.Integer">
+            <column name="anho_inicio" />
+        </property>
+        <property name="anhoFin" type="java.lang.Integer">
+            <column name="anho_fin" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="256" />
+        </property>
+        <property name="spreadsheetkey" type="string">
+            <column name="spreadsheetkey" length="64" not-null="true" />
+        </property>
+        <set name="cursoses" table="cursos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="curricula_id" not-null="true" />
+            </key>
+            <one-to-many class="Cursos" />
+        </set>
+    </class>
+</hibernate-mapping>
